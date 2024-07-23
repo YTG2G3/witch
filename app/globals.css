@@ -10,7 +10,17 @@
 }
 
 @layer typography {
-  /* Add custom typography styles here */
+  body {
+    font-family: var(--font-inter);
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-manrope);
+  }
 }
 
 @layer utilities {
@@ -31,5 +41,11 @@
     -ms-user-select: none; /* Internet Explorer/Edge */
     user-select: none; /* Non-prefixed version, currently
                                     supported by Chrome, Edge, Opera and Firefox */
+  }
+}
+
+@layer layout {
+  .grid-rows-screen {
+    grid-template-rows: auto 1fr;
   }
 }
