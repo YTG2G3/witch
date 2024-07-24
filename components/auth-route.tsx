@@ -2,17 +2,13 @@ import { Database } from "@/lib/supabase/database.types";
 import { createClient } from "@/lib/supabase/server";
 import { SupabaseClient, User } from "@supabase/supabase-js";
 import { NextRequest, NextResponse } from "next/server";
-
-export type AuthUser = User & {
-  profile: Database["public"]["Tables"]["profiles"]["Row"] | null;
-  is_admin: boolean;
-};
+import { WitchUser } from "./auth-provider";
 
 // TODO: Check if the user has the required access level
 export default function authRoute(
   callback: (
     req: NextRequest,
-    user: AuthUser,
+    user: WitchUser,
     supabase: SupabaseClient<Database>,
   ) => Promise<any>,
   adminOnly = false,

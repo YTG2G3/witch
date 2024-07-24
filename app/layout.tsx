@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   description: "Decentralized streaming platform built with Cloudflare Calls.",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;

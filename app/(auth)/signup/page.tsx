@@ -10,7 +10,13 @@ export default function LoginPage() {
   ): Promise<string | null> {
     "use server";
     const supabase = createClient();
-    const { error } = await supabase.auth.signUp(data);
+    if (data.password !== data.retype) {
+      return "Passwords do not match";
+    }
+    const { error } = await supabase.auth.signUp({
+      email: data.email,
+      password: data.password,
+    });
     if (error) return error.message;
 
     revalidatePath("/", "layout");

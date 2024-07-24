@@ -13,6 +13,7 @@ import {
   Input,
   Link,
 } from "@nextui-org/react";
+import { useRouter } from "next/navigation";
 import { useRef } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
@@ -23,6 +24,7 @@ export default function SignupForm({
 }: {
   handleSignup: (data: z.infer<typeof signupSchema>) => Promise<string | null>;
 }) {
+  const router = useRouter();
   const formRef = useRef<HTMLFormElement>(null);
 
   function handleFormSubmit() {
@@ -45,11 +47,13 @@ export default function SignupForm({
       new Promise(async (resolve, reject) => {
         let err = await handleSignup(values);
         if (err) reject(err);
+        setTimeout(() => router.push("/"), 3000);
         resolve(null);
       }),
       {
         loading: "Signing up...",
-        success: "Signed up successfully! Please check your email to verify.",
+        success:
+          "Signed up successfully! Please check your email to verify. You will be redirected shortly.",
         error: (err: string) => `Error: ${err}`,
       },
     );
