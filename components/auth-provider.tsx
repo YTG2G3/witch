@@ -1,14 +1,10 @@
 "use client";
 
+import { WitchUser } from "@/lib/auth";
 import { createClient } from "@/lib/supabase/client";
 import { Database } from "@/lib/supabase/database.types";
 import { User } from "@supabase/supabase-js";
 import { createContext, useEffect, useState } from "react";
-
-export type WitchUser = User & {
-  profile: Database["public"]["Tables"]["profiles"]["Row"] | null;
-  is_admin: boolean;
-};
 
 export const AuthContext = createContext<{ user: WitchUser | null }>({
   user: null,
@@ -45,7 +41,7 @@ export default function AuthProvider({
     const { data: role, error: roleError } = await supabase
       .from("roles")
       .select("*")
-      .eq("id", data.user.id)
+      .eq("user_id", data.user.id)
       .single();
     if (roleError) {
       console.error(roleError);
@@ -55,7 +51,7 @@ export default function AuthProvider({
     const { data: profile, error: profileError } = await supabase
       .from("profiles")
       .select("*")
-      .eq("id", data.user.id)
+      .eq("user_id", data.user.id)
       .single();
     if (profileError) {
       console.error(profileError);

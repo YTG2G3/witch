@@ -13,25 +13,25 @@ export type Database = {
         Row: {
           avatar_url: string | null
           display_name: string | null
-          id: string
           tag_name: string | null
+          user_id: string
         }
         Insert: {
           avatar_url?: string | null
           display_name?: string | null
-          id: string
           tag_name?: string | null
+          user_id: string
         }
         Update: {
           avatar_url?: string | null
           display_name?: string | null
-          id?: string
           tag_name?: string | null
+          user_id?: string
         }
         Relationships: [
           {
-            foreignKeyName: "profiles_id_fkey"
-            columns: ["id"]
+            foreignKeyName: "profiles_user_id_fkey"
+            columns: ["user_id"]
             isOneToOne: true
             referencedRelation: "users"
             referencedColumns: ["id"]
@@ -40,22 +40,57 @@ export type Database = {
       }
       roles: {
         Row: {
-          id: string
           is_admin: boolean
+          user_id: string
         }
         Insert: {
-          id: string
           is_admin?: boolean
+          user_id: string
         }
         Update: {
-          id?: string
           is_admin?: boolean
+          user_id?: string
         }
         Relationships: [
           {
-            foreignKeyName: "roles_id_fkey"
-            columns: ["id"]
+            foreignKeyName: "roles_user_id_fkey"
+            columns: ["user_id"]
             isOneToOne: true
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      streams: {
+        Row: {
+          calls_session: string | null
+          descsription: string
+          id: string
+          started_at: string
+          title: string
+          user_id: string | null
+        }
+        Insert: {
+          calls_session?: string | null
+          descsription: string
+          id?: string
+          started_at?: string
+          title: string
+          user_id?: string | null
+        }
+        Update: {
+          calls_session?: string | null
+          descsription?: string
+          id?: string
+          started_at?: string
+          title?: string
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "pots_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
             referencedRelation: "users"
             referencedColumns: ["id"]
           },

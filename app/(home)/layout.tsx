@@ -17,7 +17,7 @@ export default function RootLayout({
     const { data, error } = await supabase.auth.getUser();
     if (error || !data?.user) return "Unauthorized";
     await supabase.from("profiles").upsert({
-      id: data.user.id,
+      user_id: data.user.id,
       ...values,
     });
     return null;
