@@ -47,12 +47,12 @@ export default function LoginForm({
       new Promise(async (resolve, reject) => {
         let err = await handleLogin(values);
         if (err) reject(err);
-        setTimeout(() => router.push("/"), 3000);
+        setTimeout(() => router.push("/"), 500);
         resolve(null);
       }),
       {
         loading: "Logging in...",
-        success: "Logged successfully! You will be redirected shortly.",
+        success: "Logged successfully!",
         error: (err: string) => `Error: ${err}`,
       },
     );
