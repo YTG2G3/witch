@@ -84,7 +84,7 @@ export default function SignupForm({
       <Divider />
       <CardFooter className="justify-end space-x-3">
         <Button as={Link} href="/login" variant="light">
-          Already have an account
+          Already have an account?
         </Button>
         <Button onClick={handleFormSubmit} color="primary">
           Sign Up
